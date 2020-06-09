@@ -12,6 +12,7 @@ import java.io.Serializable;
 public class Associate implements Serializable {
 
   private static final long serialVersionUID = 1L;
+
   @Id
   @GeneratedValue
   private Long id;
@@ -19,4 +20,5 @@ public class Associate implements Serializable {
   private String address;
   private String profession;
   private String phone;
+
 }

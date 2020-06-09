@@ -1,5 +1,6 @@
 package com.gym.lbdgym.model;
 
+import com.gym.lbdgym.model.enumerator.Schooling;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -10,12 +11,14 @@ import java.io.Serializable;
 @Data
 @Entity
 public class Monitor implements Serializable {
+
   private static final long serialVersionUID = 1L;
+
   @Id
   @GeneratedValue
   private Long id;
   private String name;
-  private String schooling; // enum tbm
+  private Schooling schooling;
   private String rg;
   private String professionalExperience;
   private String phone;
