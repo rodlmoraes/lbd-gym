@@ -1,12 +1,16 @@
 package com.gym.lbdgym.model.lesson;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.gym.lbdgym.model.Monitor;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.io.Serializable;
+import java.util.List;
 
 @AllArgsConstructor
 @Data
@@ -19,5 +23,8 @@ public class Lesson implements Serializable {
     @GeneratedValue
     private Long id;
     private String name;
+    @OneToMany
+    @JsonManagedReference(value = "lesson")
+    private List<Monitor> canTeach;
 
 }
