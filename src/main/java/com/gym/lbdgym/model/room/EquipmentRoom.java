@@ -18,7 +18,7 @@ public class EquipmentRoom extends Room {
 
     private int maxNumberEquipments;
 
-    @OneToMany(mappedBy = "equipmentRoom")
+    @OneToMany
     @JsonManagedReference(value = "equipmentRoom")
     private List<Equipment> equipments;
 
