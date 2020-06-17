@@ -1,6 +1,5 @@
 package com.gym.lbdgym.model.lesson;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.gym.lbdgym.model.Monitor;
 import lombok.AllArgsConstructor;
 import lombok.Data;
