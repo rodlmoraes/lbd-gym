@@ -8,7 +8,7 @@ import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import java.io.Serializable;
 import java.util.List;
 
@@ -23,8 +23,8 @@ public class Lesson implements Serializable {
     @GeneratedValue
     private Long id;
     private String name;
-    @OneToMany
-    @JsonManagedReference(value = "lesson")
-    private List<Monitor> canTeach;
+
+    @ManyToMany
+    private List<Monitor> monitors;
 
 }

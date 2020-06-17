@@ -9,8 +9,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -23,18 +23,20 @@ public class LessonAvailable extends Lesson {
 
     private String description;
     private LocalDateTime dateTime;
-    @OneToOne
-    @JsonManagedReference(value = "lessonAvailable")
+
+    @ManyToOne
+    @JsonBackReference(value = "monitor")
     private Monitor monitor;
-    @OneToMany
-    @JsonManagedReference(value = "associate")
+
+    @ManyToMany
     private List<Associate> associate;
-    @OneToOne
+
+    @ManyToOne
     @JsonBackReference(value = "lessonRoom")
     private LessonRoom lessonRoom;
 
-    public LessonAvailable(Long id, String name, List<Monitor> canTeach, String description, LocalDateTime dateTime) {
-        super(id, name, canTeach);
+    public LessonAvailable(Long id, String name, List<Monitor> monitors, String description, LocalDateTime dateTime) {
+        super(id, name, monitors);
         this.description = description;
         this.dateTime = dateTime;
     }

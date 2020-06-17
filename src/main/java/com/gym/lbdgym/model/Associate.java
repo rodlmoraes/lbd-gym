@@ -24,11 +24,14 @@ public class Associate implements Serializable {
   private String address;
   private String profession;
   private String phone;
-  @ManyToOne
-  @JsonBackReference(value = "associate")
-  private LessonAvailable lessonAvailable;
-  @OneToMany
-  @JsonManagedReference(value = "bankingData")
-  private List<BankingData> bankingData;
 
+  @ManyToMany
+  private List<LessonAvailable> lessonsAvailable;
+
+  @ManyToMany
+  private List<BankingData> bankingDatas;
+
+  @OneToMany
+  @JsonManagedReference(value = "associate")
+  private List<Booking> bookings;
 }
