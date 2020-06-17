@@ -22,11 +22,10 @@ public class Equipment implements Serializable {
   @Id
   @GeneratedValue
   private Long id;
-  private State conservationState; // should be enum
+  private State conservationState;
   private String description;
 
   @ManyToOne
- // @JoinColumn(name = "equipmentRoom_id", nullable = false)
   @JsonBackReference(value = "equipmentRoom")
   private EquipmentRoom equipmentRoom;
 

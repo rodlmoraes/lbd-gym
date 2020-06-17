@@ -17,7 +17,9 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class LessonAvailable extends Lesson{
+public class LessonAvailable extends Lesson {
+
+    private static final long serialVersionUID = 1L;
 
     private String description;
     private LocalDateTime dateTime;

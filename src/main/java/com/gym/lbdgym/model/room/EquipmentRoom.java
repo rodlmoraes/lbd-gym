@@ -1,6 +1,5 @@
 package com.gym.lbdgym.model.room;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.gym.lbdgym.model.Equipment;
 import lombok.Getter;
@@ -14,6 +13,8 @@ import java.util.List;
 @Setter
 @Entity
 public class EquipmentRoom extends Room {
+
+    private static final long serialVersionUID = 1L;
 
     private int maxNumberEquipments;
 

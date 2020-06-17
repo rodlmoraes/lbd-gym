@@ -7,13 +7,14 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import java.io.Serializable;
 import java.util.List;
 
 @Getter
 @Setter
 @Entity
-public class LessonRoom extends Room implements Serializable {
+public class LessonRoom extends Room {
+
+    private static final long serialVersionUID = 1L;
 
     private String lesson;
     private int maxNumberAssociates;
