@@ -31,4 +31,8 @@ public class SquashRoomService {
   public void deleteById(Long id) {
     repository.deleteById(id);
   }
+
+  //
+  //
+  //
 }
