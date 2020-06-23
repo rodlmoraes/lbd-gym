@@ -26,10 +26,7 @@ public class BankingDataController {
   @GetMapping(path = { "/{id}" })
   public ResponseEntity<BankingData> findById(@PathVariable Long id) {
     Optional<BankingData> bankingData = service.findById(id);
-    if (!bankingData.isPresent()) {
-      return ResponseEntity.badRequest().build();
-    }
-    return ResponseEntity.ok(bankingData.get());
+    return bankingData.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.badRequest().build());
   }
 
   @PostMapping

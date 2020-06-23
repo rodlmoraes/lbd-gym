@@ -40,6 +40,4 @@ public class BookingService {
   }
 
   //ver a disponibilidade de sala
-  //reserver sala
-  //verificar de um socio tem sala reservada e qual é a sala
 }

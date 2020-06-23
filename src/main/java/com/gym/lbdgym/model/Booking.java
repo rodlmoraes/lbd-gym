@@ -23,7 +23,8 @@ public class Booking implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
-    private LocalDateTime dateTime;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
 
     @ManyToOne
     @JsonBackReference(value = "squashRoom")

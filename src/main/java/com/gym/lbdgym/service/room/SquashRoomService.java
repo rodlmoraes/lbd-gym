@@ -3,6 +3,7 @@ package com.gym.lbdgym.service.room;
 import java.util.List;
 import java.util.Optional;
 
+import com.gym.lbdgym.model.Booking;
 import com.gym.lbdgym.model.room.SquashRoom;
 import com.gym.lbdgym.repository.room.SquashRoomRepository;
 
@@ -32,7 +33,9 @@ public class SquashRoomService {
     repository.deleteById(id);
   }
 
-  //
-  //
-  //
+  public List<Booking> bookingsBySquashRoom (Long id){
+    Optional<SquashRoom> squashRoom = repository.findById(id);
+    return squashRoom.map(SquashRoom::getBookings).orElse(null);
+  }
+
 }

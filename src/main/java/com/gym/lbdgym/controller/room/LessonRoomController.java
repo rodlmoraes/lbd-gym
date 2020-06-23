@@ -26,10 +26,7 @@ public class LessonRoomController {
   @GetMapping(path = { "/{id}" })
   public ResponseEntity<LessonRoom> findById(@PathVariable Long id) {
     Optional<LessonRoom> lessonRoom = service.findById(id);
-    if (!lessonRoom.isPresent()) {
-      return ResponseEntity.badRequest().build();
-    }
-    return ResponseEntity.ok(lessonRoom.get());
+    return lessonRoom.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.badRequest().build());
   }
 
   @PostMapping

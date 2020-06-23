@@ -26,10 +26,7 @@ public class AssociateController {
   @GetMapping(path = { "/{id}" })
   public ResponseEntity<Associate> findById(@PathVariable Long id) {
     Optional<Associate> associate = service.findById(id);
-    if (!associate.isPresent()) {
-      return ResponseEntity.badRequest().build();
-    }
-    return ResponseEntity.ok(associate.get());
+    return associate.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.badRequest().build());
   }
 
   @PostMapping

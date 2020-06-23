@@ -26,10 +26,7 @@ public class MonitorController {
   @GetMapping(path = { "/{id}" })
   public ResponseEntity<Monitor> findById(@PathVariable Long id) {
     Optional<Monitor> monitor = service.findById(id);
-    if (!monitor.isPresent()) {
-      return ResponseEntity.badRequest().build();
-    }
-    return ResponseEntity.ok(monitor.get());
+    return monitor.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.badRequest().build());
   }
 
   @PostMapping

@@ -26,10 +26,7 @@ public class EquipmentRoomController {
   @GetMapping(path = { "/{id}" })
   public ResponseEntity<EquipmentRoom> findById(@PathVariable Long id) {
     Optional<EquipmentRoom> equipmentRoom = service.findById(id);
-    if (!equipmentRoom.isPresent()) {
-      return ResponseEntity.badRequest().build();
-    }
-    return ResponseEntity.ok(equipmentRoom.get());
+    return equipmentRoom.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.badRequest().build());
   }
 
   @PostMapping

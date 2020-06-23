@@ -26,10 +26,7 @@ public class SquashRoomController {
   @GetMapping(path = { "/{id}" })
   public ResponseEntity<SquashRoom> findById(@PathVariable Long id) {
     Optional<SquashRoom> squashRoom = service.findById(id);
-    if (!squashRoom.isPresent()) {
-      return ResponseEntity.badRequest().build();
-    }
-    return ResponseEntity.ok(squashRoom.get());
+    return squashRoom.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.badRequest().build());
   }
 
   @PostMapping

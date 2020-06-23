@@ -26,10 +26,7 @@ public class LessonController {
   @GetMapping(path = { "/{id}" })
   public ResponseEntity<Lesson> findById(@PathVariable Long id) {
     Optional<Lesson> lesson = service.findById(id);
-    if (!lesson.isPresent()) {
-      return ResponseEntity.badRequest().build();
-    }
-    return ResponseEntity.ok(lesson.get());
+    return lesson.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.badRequest().build());
   }
 
   @PostMapping

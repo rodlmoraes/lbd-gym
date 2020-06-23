@@ -1,8 +1,13 @@
 package com.gym.lbdgym.controller;
 
+import java.net.PortUnreachableException;
+import java.util.List;
 import java.util.Optional;
 
 import com.gym.lbdgym.model.Booking;
+import com.gym.lbdgym.model.room.SquashRoom;
+import com.gym.lbdgym.repository.AssociateRepository;
+import com.gym.lbdgym.service.AssociateService;
 import com.gym.lbdgym.service.BookingService;
 
 import org.springframework.http.ResponseEntity;
@@ -21,19 +26,18 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping({ "/booking" })
 @RequiredArgsConstructor
 public class BookingController {
+
   private final BookingService service;
+  private final AssociateService associateService;
 
   @GetMapping(path = { "/{id}" })
   public ResponseEntity<Booking> findById(@PathVariable Long id) {
     Optional<Booking> booking = service.findById(id);
-    if (!booking.isPresent()) {
-      return ResponseEntity.badRequest().build();
-    }
-    return ResponseEntity.ok(booking.get());
+    return booking.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.badRequest().build());
   }
 
   @PostMapping
-  public ResponseEntity<Booking> create(@RequestBody Booking booking) {
+  public ResponseEntity<Booking> bookRoom (@RequestBody Booking booking) {
     return ResponseEntity.ok(service.save(booking));
   }
 
@@ -52,5 +56,13 @@ public class BookingController {
     }
     service.deleteById(id);
     return ResponseEntity.ok().build();
+  }
+
+  @GetMapping(path = { "/associateSquashRooms/{associateId}" })
+  public ResponseEntity<List<SquashRoom>> findAssociateSquashRooms(@PathVariable Long associateId){
+    if (!associateService.findById(associateId).isPresent()) {
+      return ResponseEntity.badRequest().build();
+    }
+    return ResponseEntity.ok(service.associateSquashRooms(associateId));
   }
 }
