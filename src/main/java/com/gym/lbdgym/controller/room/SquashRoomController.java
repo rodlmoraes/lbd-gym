@@ -1,5 +1,6 @@
 package com.gym.lbdgym.controller.room;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import com.gym.lbdgym.model.room.SquashRoom;
@@ -35,7 +36,7 @@ public class SquashRoomController {
   }
 
   @PutMapping(value = "/{id}")
-  public ResponseEntity<SquashRoom> update(@PathVariable("id") Long id, @RequestBody SquashRoom SquashRoom) {
+  public ResponseEntity<SquashRoom> update(@PathVariable Long id, @RequestBody SquashRoom SquashRoom) {
     if (!service.findById(id).isPresent()) {
       return ResponseEntity.badRequest().build();
     }
@@ -49,5 +50,15 @@ public class SquashRoomController {
     }
     service.deleteById(id);
     return ResponseEntity.ok().build();
+  }
+
+  @PostMapping(path = { "/available" })
+  public ResponseEntity<Boolean> isAvailable(@RequestBody Long id, @RequestBody LocalDateTime startDate,
+      @RequestBody LocalDateTime endDate) {
+    if (!service.findById(id).isPresent()) {
+      return ResponseEntity.badRequest().build();
+    }
+
+    return ResponseEntity.ok(service.isAvailable(id, startDate, endDate));
   }
 }

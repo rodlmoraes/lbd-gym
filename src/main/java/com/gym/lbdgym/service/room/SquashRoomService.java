@@ -1,5 +1,6 @@
 package com.gym.lbdgym.service.room;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,9 +34,17 @@ public class SquashRoomService {
     repository.deleteById(id);
   }
 
-  public List<Booking> bookingsBySquashRoom (Long id){
+  public Optional<List<Booking>> bookingsBySquashRoom(Long id) {
     Optional<SquashRoom> squashRoom = repository.findById(id);
-    return squashRoom.map(SquashRoom::getBookings).orElse(null);
+    return squashRoom.map(SquashRoom::getBookings);
   }
 
+  public boolean isAvailable(Long id, LocalDateTime startDate, LocalDateTime endDate) {
+    Optional<SquashRoom> squashRoom = repository.findById(id);
+
+    boolean occupied = squashRoom.get().getBookings().stream()
+        .anyMatch(b -> b.getStartDate().isBefore(endDate) && b.getEndDate().isAfter(startDate));
+
+    return !occupied;
+  }
 }

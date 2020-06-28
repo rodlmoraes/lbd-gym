@@ -34,10 +34,8 @@ public class BookingService {
     repository.deleteById(id);
   }
 
-  public List<SquashRoom> associateSquashRooms (Long idAssociate) {
-    List<Booking> bookings =  repository.findAllByAssociate(idAssociate);
+  public List<SquashRoom> associateSquashRooms(Long idAssociate) {
+    List<Booking> bookings = repository.findAllByAssociate(idAssociate);
     return bookings.stream().map(Booking::getSquashRoom).collect(Collectors.toList());
   }
-
-  //ver a disponibilidade de sala
 }

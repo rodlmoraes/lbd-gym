@@ -35,7 +35,7 @@ public class BankingDataController {
   }
 
   @PutMapping(value = "/{id}")
-  public ResponseEntity<BankingData> update(@PathVariable("id") Long id, @RequestBody BankingData BankingData) {
+  public ResponseEntity<BankingData> update(@PathVariable Long id, @RequestBody BankingData BankingData) {
     if (!service.findById(id).isPresent()) {
       return ResponseEntity.badRequest().build();
     }

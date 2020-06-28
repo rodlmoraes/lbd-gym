@@ -35,7 +35,7 @@ public class LessonController {
   }
 
   @PutMapping(value = "/{id}")
-  public ResponseEntity<Lesson> update(@PathVariable("id") Long id, @RequestBody Lesson Lesson) {
+  public ResponseEntity<Lesson> update(@PathVariable Long id, @RequestBody Lesson Lesson) {
     if (!service.findById(id).isPresent()) {
       return ResponseEntity.badRequest().build();
     }

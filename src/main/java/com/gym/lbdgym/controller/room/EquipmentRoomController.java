@@ -35,7 +35,7 @@ public class EquipmentRoomController {
   }
 
   @PutMapping(value = "/{id}")
-  public ResponseEntity<EquipmentRoom> update(@PathVariable("id") Long id, @RequestBody EquipmentRoom EquipmentRoom) {
+  public ResponseEntity<EquipmentRoom> update(@PathVariable Long id, @RequestBody EquipmentRoom EquipmentRoom) {
     if (!service.findById(id).isPresent()) {
       return ResponseEntity.badRequest().build();
     }

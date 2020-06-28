@@ -35,7 +35,7 @@ public class AssociateController {
   }
 
   @PutMapping(value = "/{id}")
-  public ResponseEntity<Associate> update(@PathVariable("id") Long id, @RequestBody Associate Associate) {
+  public ResponseEntity<Associate> update(@PathVariable Long id, @RequestBody Associate Associate) {
     if (!service.findById(id).isPresent()) {
       return ResponseEntity.badRequest().build();
     }

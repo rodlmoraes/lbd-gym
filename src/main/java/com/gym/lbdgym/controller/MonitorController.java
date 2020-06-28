@@ -35,7 +35,7 @@ public class MonitorController {
   }
 
   @PutMapping(value = "/{id}")
-  public ResponseEntity<Monitor> update(@PathVariable("id") Long id, @RequestBody Monitor Monitor) {
+  public ResponseEntity<Monitor> update(@PathVariable Long id, @RequestBody Monitor Monitor) {
     if (!service.findById(id).isPresent()) {
       return ResponseEntity.badRequest().build();
     }
