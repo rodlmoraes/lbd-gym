@@ -1,14 +1,12 @@
 package com.gym.lbdgym.service.lesson;
 
-import java.util.List;
-import java.util.Optional;
-
 import com.gym.lbdgym.model.lesson.Lesson;
 import com.gym.lbdgym.repository.lesson.LessonRepository;
-
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import lombok.RequiredArgsConstructor;
+import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service

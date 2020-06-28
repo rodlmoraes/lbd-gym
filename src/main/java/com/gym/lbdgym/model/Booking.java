@@ -2,7 +2,6 @@ package com.gym.lbdgym.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.gym.lbdgym.model.room.SquashRoom;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

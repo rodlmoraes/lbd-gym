@@ -1,16 +1,14 @@
 package com.gym.lbdgym.service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
 import com.gym.lbdgym.model.Booking;
 import com.gym.lbdgym.model.room.SquashRoom;
 import com.gym.lbdgym.repository.BookingRepository;
-
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import lombok.RequiredArgsConstructor;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
