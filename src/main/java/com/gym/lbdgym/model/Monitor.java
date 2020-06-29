@@ -6,11 +6,13 @@ import com.gym.lbdgym.model.lesson.Lesson;
 import com.gym.lbdgym.model.lesson.LessonAvailable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
+@NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity

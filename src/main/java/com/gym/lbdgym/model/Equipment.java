@@ -5,6 +5,7 @@ import com.gym.lbdgym.model.enumerator.State;
 import com.gym.lbdgym.model.room.EquipmentRoom;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import java.io.Serializable;
 
+@NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
