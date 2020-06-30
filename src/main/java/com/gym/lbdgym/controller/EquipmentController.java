@@ -25,9 +25,9 @@ public class EquipmentController {
     return ResponseEntity.ok(service.save(equipment));
   }
 
-  @PutMapping(value = "/{id}")
-  public ResponseEntity<Equipment> update(@PathVariable Long id, @RequestBody Equipment equipment) {
-    if (!service.findById(id).isPresent()) {
+  @PutMapping
+  public ResponseEntity<Equipment> update(@RequestBody Equipment equipment) {
+    if (!service.findById(equipment.getId()).isPresent()) {
       return ResponseEntity.badRequest().build();
     }
     return ResponseEntity.ok(service.save(equipment));

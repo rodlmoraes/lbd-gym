@@ -25,12 +25,12 @@ public class EquipmentRoomController {
     return ResponseEntity.ok(service.save(equipmentRoom));
   }
 
-  @PutMapping(value = "/{id}")
-  public ResponseEntity<EquipmentRoom> update(@PathVariable Long id, @RequestBody EquipmentRoom EquipmentRoom) {
-    if (!service.findById(id).isPresent()) {
+  @PutMapping
+  public ResponseEntity<EquipmentRoom> update(@RequestBody EquipmentRoom equipmentRoom) {
+    if (!service.findById(equipmentRoom.getId()).isPresent()) {
       return ResponseEntity.badRequest().build();
     }
-    return ResponseEntity.ok(service.save(EquipmentRoom));
+    return ResponseEntity.ok(service.save(equipmentRoom));
   }
 
   @DeleteMapping(path = { "/{id}" })

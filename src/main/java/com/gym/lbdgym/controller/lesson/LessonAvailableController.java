@@ -25,12 +25,12 @@ public class LessonAvailableController {
     return ResponseEntity.ok(service.save(lessonAvailable));
   }
 
-  @PutMapping(value = "/{id}")
-  public ResponseEntity<LessonAvailable> update(@PathVariable Long id, @RequestBody LessonAvailable LessonAvailable) {
-    if (!service.findById(id).isPresent()) {
+  @PutMapping
+  public ResponseEntity<LessonAvailable> update(@RequestBody LessonAvailable lessonAvailable) {
+    if (!service.findById(lessonAvailable.getId()).isPresent()) {
       return ResponseEntity.badRequest().build();
     }
-    return ResponseEntity.ok(service.save(LessonAvailable));
+    return ResponseEntity.ok(service.save(lessonAvailable));
   }
 
   @DeleteMapping(path = { "/{id}" })

@@ -38,12 +38,12 @@ public class BookingController {
     return ResponseEntity.ok(service.save(booking) != null);
   }
 
-  @PutMapping(value = "/{id}")
-  public ResponseEntity<Booking> update(@PathVariable Long id, @RequestBody Booking Booking) {
-    if (!service.findById(id).isPresent()) {
+  @PutMapping
+  public ResponseEntity<Booking> update(@RequestBody Booking booking) {
+    if (!service.findById(booking.getId()).isPresent()) {
       return ResponseEntity.badRequest().build();
     }
-    return ResponseEntity.ok(service.save(Booking));
+    return ResponseEntity.ok(service.save(booking));
   }
 
   @DeleteMapping(path = { "/{id}" })

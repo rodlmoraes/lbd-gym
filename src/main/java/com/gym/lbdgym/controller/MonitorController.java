@@ -25,12 +25,12 @@ public class MonitorController {
     return ResponseEntity.ok(service.save(monitor));
   }
 
-  @PutMapping(value = "/{id}")
-  public ResponseEntity<Monitor> update(@PathVariable Long id, @RequestBody Monitor Monitor) {
-    if (!service.findById(id).isPresent()) {
+  @PutMapping
+  public ResponseEntity<Monitor> update(@RequestBody Monitor monitor) {
+    if (!service.findById(monitor.getId()).isPresent()) {
       return ResponseEntity.badRequest().build();
     }
-    return ResponseEntity.ok(service.save(Monitor));
+    return ResponseEntity.ok(service.save(monitor));
   }
 
   @DeleteMapping(path = { "/{id}" })

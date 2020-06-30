@@ -26,12 +26,12 @@ public class SquashRoomController {
     return ResponseEntity.ok(service.save(squashRoom));
   }
 
-  @PutMapping(value = "/{id}")
-  public ResponseEntity<SquashRoom> update(@PathVariable Long id, @RequestBody SquashRoom SquashRoom) {
-    if (!service.findById(id).isPresent()) {
+  @PutMapping
+  public ResponseEntity<SquashRoom> update(@RequestBody SquashRoom squashRoom) {
+    if (!service.findById(squashRoom.getId()).isPresent()) {
       return ResponseEntity.badRequest().build();
     }
-    return ResponseEntity.ok(service.save(SquashRoom));
+    return ResponseEntity.ok(service.save(squashRoom));
   }
 
   @DeleteMapping(path = { "/{id}" })
