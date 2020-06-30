@@ -19,7 +19,7 @@ public class SquashRoom extends Room {
 
     private State conservationState;
 
-    @OneToMany
+    @OneToMany(mappedBy = "squashRoom")
     @JsonManagedReference(value = "squashRoom")
     private List<Booking> bookings;
 
