@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -13,6 +14,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class LessonController {
   private final LessonService service;
+
+  @GetMapping
+  public ResponseEntity<List<Lesson>> findAll() {
+    return ResponseEntity.ok(service.findAll());
+  }
 
   @GetMapping(path = { "/{id}" })
   public ResponseEntity<Lesson> findById(@PathVariable Long id) {

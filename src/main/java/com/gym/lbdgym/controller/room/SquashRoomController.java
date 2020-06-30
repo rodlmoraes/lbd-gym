@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -14,6 +15,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class SquashRoomController {
   private final SquashRoomService service;
+
+  @GetMapping
+  public ResponseEntity<List<SquashRoom>> findAll() {
+    return ResponseEntity.ok(service.findAll());
+  }
 
   @GetMapping(path = { "/{id}" })
   public ResponseEntity<SquashRoom> findById(@PathVariable Long id) {

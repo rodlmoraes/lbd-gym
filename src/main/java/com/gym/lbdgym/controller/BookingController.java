@@ -21,6 +21,11 @@ public class BookingController {
   private final AssociateService associateService;
   private final SquashRoomService squashRoomService;
 
+  @GetMapping
+  public ResponseEntity<List<Booking>> findAll() {
+    return ResponseEntity.ok(service.findAll());
+  }
+
   @GetMapping(path = { "/{id}" })
   public ResponseEntity<Booking> findById(@PathVariable Long id) {
     Optional<Booking> booking = service.findById(id);

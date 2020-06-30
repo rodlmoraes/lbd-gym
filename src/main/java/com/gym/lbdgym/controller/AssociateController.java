@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -13,6 +14,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AssociateController {
   private final AssociateService service;
+
+  @GetMapping
+  public ResponseEntity<List<Associate>> findAll() {
+    return ResponseEntity.ok(service.findAll());
+  }
 
   @GetMapping(path = { "/{id}" })
   public ResponseEntity<Associate> findById(@PathVariable Long id) {
