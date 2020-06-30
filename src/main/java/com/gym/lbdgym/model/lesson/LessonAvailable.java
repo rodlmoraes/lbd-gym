@@ -3,8 +3,8 @@ package com.gym.lbdgym.model.lesson;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.gym.lbdgym.model.Monitor;
-import com.gym.lbdgym.model.MonitorLessons;
-import com.gym.lbdgym.model.StudentsInClass;
+import com.gym.lbdgym.model.CanTeach;
+import com.gym.lbdgym.model.Enrollment;
 import com.gym.lbdgym.model.room.LessonRoom;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,15 +31,14 @@ public class LessonAvailable extends Lesson {
 
     @OneToMany
     @JsonManagedReference(value = "lessonAvailable")
-    private List<StudentsInClass> studentsInClasses;
+    private List<Enrollment> enrollments;
 
     @ManyToOne
     @JsonBackReference(value = "lessonRoom")
     private LessonRoom lessonRoom;
 
-    public LessonAvailable(Long id, String name, List<MonitorLessons> monitorLessons, String description,
-            LocalDateTime dateTime) {
-        super(id, name, monitorLessons);
+    public LessonAvailable(Long id, String name, List<CanTeach> canTeach, String description, LocalDateTime dateTime) {
+        super(id, name, canTeach);
         this.description = description;
         this.dateTime = dateTime;
     }

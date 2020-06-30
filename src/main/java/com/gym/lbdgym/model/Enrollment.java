@@ -11,13 +11,14 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
-public class StudentsInClass implements Serializable {
+public class Enrollment implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -26,10 +27,12 @@ public class StudentsInClass implements Serializable {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "associate_id", nullable = false)
     @JsonBackReference(value = "associate")
     private Associate associate;
 
     @ManyToOne
+    @JoinColumn(name = "lessonAvailable_id", nullable = false)
     @JsonBackReference(value = "lessonAvailable")
     private LessonAvailable lessonAvailable;
 

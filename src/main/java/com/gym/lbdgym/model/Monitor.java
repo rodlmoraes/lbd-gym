@@ -34,5 +34,5 @@ public class Monitor implements Serializable {
 
   @OneToMany
   @JsonManagedReference(value = "monitor")
-  private List<MonitorLessons> monitorLessons;
+  private List<CanTeach> monitorLessons;
 }

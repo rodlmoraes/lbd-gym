@@ -1,7 +1,7 @@
 package com.gym.lbdgym.model.lesson;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.gym.lbdgym.model.MonitorLessons;
+import com.gym.lbdgym.model.CanTeach;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,6 +25,6 @@ public class Lesson implements Serializable {
 
     @OneToMany
     @JsonManagedReference(value = "lesson")
-    public List<MonitorLessons> monitorLessons;
+    public List<CanTeach> canTeach;
 
 }
