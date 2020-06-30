@@ -26,8 +26,8 @@ public class Associate implements Serializable {
   private String phone;
 
   @OneToMany
-  @JsonManagedReference(value = "students_in_class")
-  private List<StudentsInClass> studentsInClasses;
+  @JsonManagedReference(value = "studentsInClass")
+  private List<StudentsInClass> studentsInClass;
 
   @OneToOne
   private BankingData bankingData;
