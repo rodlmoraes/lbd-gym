@@ -32,7 +32,7 @@ public class Associate implements Serializable {
   @OneToOne
   private BankingData bankingData;
 
-  @OneToMany
+  @OneToMany(mappedBy = "associate")
   @JsonManagedReference(value = "associate")
   private List<Booking> bookings;
 }
