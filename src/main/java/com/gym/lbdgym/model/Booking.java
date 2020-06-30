@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -28,10 +29,12 @@ public class Booking implements Serializable {
     private LocalDateTime endDate;
 
     @ManyToOne
+    @JoinColumn(name = "squashRoom_id", nullable = false)
     @JsonBackReference(value = "squashRoom")
     private SquashRoom squashRoom;
 
     @ManyToOne
+    @JoinColumn(name = "associate_id", nullable = false)
     @JsonBackReference(value = "associate")
     private Associate associate;
 
