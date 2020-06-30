@@ -1,7 +1,6 @@
 package com.gym.lbdgym.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.gym.lbdgym.model.lesson.LessonAvailable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,11 +25,12 @@ public class Associate implements Serializable {
   private String profession;
   private String phone;
 
-  @ManyToMany
-  private List<LessonAvailable> lessonsAvailable;
+  @OneToMany
+  @JsonManagedReference(value = "students_in_class")
+  private List<StudentsInClass> studentsInClasses;
 
-  @ManyToMany
-  private List<BankingData> bankingDatas;
+  @OneToOne
+  private BankingData bankingData;
 
   @OneToMany
   @JsonManagedReference(value = "associate")

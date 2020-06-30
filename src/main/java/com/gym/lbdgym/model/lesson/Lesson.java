@@ -1,14 +1,13 @@
 package com.gym.lbdgym.model.lesson;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.gym.lbdgym.model.Monitor;
+import com.gym.lbdgym.model.MonitorLessons;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -25,7 +24,8 @@ public class Lesson implements Serializable {
     private Long id;
     private String name;
 
-    @ManyToMany
-    private List<Monitor> monitors;
+    @OneToMany
+    @JsonManagedReference(value = "monitorLessons")
+    public List<MonitorLessons> monitorLessons;
 
 }

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import java.io.Serializable;
 
 @NoArgsConstructor
@@ -22,4 +23,7 @@ public class BankingData implements Serializable {
   private Long id;
   private String account;
   private String agency;
+
+  @OneToOne
+  private Associate associate;
 }

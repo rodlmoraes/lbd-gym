@@ -18,7 +18,8 @@ public class SquashRoom extends Room {
     private static final long serialVersionUID = 1L;
 
     private State conservationState;
-    @OneToMany
+
+    @OneToMany(mappedBy = "squashRoom")
     @JsonManagedReference(value = "squashRoom")
     private List<Booking> bookings;
 
