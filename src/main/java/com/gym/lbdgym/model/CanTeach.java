@@ -8,10 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,10 +22,12 @@ public class CanTeach implements Serializable {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "monitor_id",nullable = false)
     @JsonBackReference(value = "monitor")
     private Monitor monitor;
 
     @ManyToOne
+    @JoinColumn(name = "lesson_id", nullable = false)
     @JsonBackReference(value = "lesson")
     private Lesson lesson;
 }

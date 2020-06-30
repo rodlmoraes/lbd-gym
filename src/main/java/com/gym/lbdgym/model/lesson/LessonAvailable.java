@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import java.time.LocalDateTime;
@@ -26,6 +27,7 @@ public class LessonAvailable extends Lesson {
     private LocalDateTime dateTime;
 
     @ManyToOne
+    @JoinColumn(name = "monitor_id", nullable = false)
     @JsonBackReference(value = "monitor")
     private Monitor monitor;
 
@@ -34,6 +36,7 @@ public class LessonAvailable extends Lesson {
     private List<Enrollment> enrollments;
 
     @ManyToOne
+    @JoinColumn(name = "lessonRoom_id", nullable = false)
     @JsonBackReference(value = "lessonRoom")
     private LessonRoom lessonRoom;
 
