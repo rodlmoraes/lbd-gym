@@ -30,10 +30,10 @@ public class Monitor implements Serializable {
   private String phone;
 
   @OneToMany
-  @JsonManagedReference(value = "lessonsAvailabe")
-  private List<LessonAvailable> lessonsAvailabe;
+  @JsonManagedReference(value = "monitor")
+  private List<LessonAvailable> lessonsAvailable;
 
   @OneToMany
-  @JsonManagedReference(value = "monitorLessons")
+  @JsonManagedReference(value = "monitor")
   private List<MonitorLessons> monitorLessons;
 }

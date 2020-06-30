@@ -28,7 +28,7 @@ public class LessonAvailable extends Lesson {
     private Monitor monitor;
 
     @OneToMany
-    @JsonManagedReference(value = "studentsInClass")
+    @JsonManagedReference(value = "lessonAvailable")
     private List<StudentsInClass> studentsInClasses;
 
     @ManyToOne

@@ -23,10 +23,10 @@ public class MonitorLessons {
     private Long id;
 
     @ManyToOne
-    @JsonBackReference(value = "monitorLessons")
+    @JsonBackReference(value = "monitor")
     private Monitor monitor;
 
     @ManyToOne
-    @JsonBackReference(value = "monitorLessons")
+    @JsonBackReference(value = "lesson")
     private Lesson lesson;
 }

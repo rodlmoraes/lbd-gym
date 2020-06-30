@@ -20,7 +20,7 @@ public class Room implements Serializable {
   @Id
   @GeneratedValue
   public Long id;
-  public String location; // string???
+  public String location;
   public int size;
 
 }

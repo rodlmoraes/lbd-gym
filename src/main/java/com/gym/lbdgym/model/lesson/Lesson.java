@@ -25,7 +25,7 @@ public class Lesson implements Serializable {
     private String name;
 
     @OneToMany
-    @JsonManagedReference(value = "monitorLessons")
+    @JsonManagedReference(value = "lesson")
     public List<MonitorLessons> monitorLessons;
 
 }

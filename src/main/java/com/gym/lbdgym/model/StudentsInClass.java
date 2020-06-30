@@ -24,11 +24,11 @@ public class StudentsInClass {
     private Long id;
 
     @ManyToOne
-    @JsonBackReference(value = "studentsInClass")
+    @JsonBackReference(value = "associate")
     private Associate associate;
 
     @ManyToOne
-    @JsonBackReference(value = "studentsInClass")
+    @JsonBackReference(value = "lessonAvailable")
     private LessonAvailable lessonAvailable;
 
 }
