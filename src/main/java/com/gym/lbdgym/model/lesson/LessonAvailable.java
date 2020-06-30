@@ -20,6 +20,8 @@ import java.util.List;
 @Entity
 public class LessonAvailable extends Lesson {
 
+    private static final long serialVersionUID = 1L;
+
     private String description;
     private LocalDateTime dateTime;
 
@@ -35,7 +37,8 @@ public class LessonAvailable extends Lesson {
     @JsonBackReference(value = "lessonRoom")
     private LessonRoom lessonRoom;
 
-    public LessonAvailable(Long id, String name, List<MonitorLessons> monitorLessons, String description, LocalDateTime dateTime) {
+    public LessonAvailable(Long id, String name, List<MonitorLessons> monitorLessons, String description,
+            LocalDateTime dateTime) {
         super(id, name, monitorLessons);
         this.description = description;
         this.dateTime = dateTime;

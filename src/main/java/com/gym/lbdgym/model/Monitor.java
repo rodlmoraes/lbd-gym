@@ -2,7 +2,6 @@ package com.gym.lbdgym.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.gym.lbdgym.model.enumerator.Schooling;
-import com.gym.lbdgym.model.lesson.Lesson;
 import com.gym.lbdgym.model.lesson.LessonAvailable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
