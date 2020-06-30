@@ -12,6 +12,7 @@ import java.util.Optional;
 @RequestMapping({ "/equipment" })
 @RequiredArgsConstructor
 public class EquipmentController {
+
   private final EquipmentService service;
 
   @GetMapping(path = { "/{id}" })
