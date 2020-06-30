@@ -25,12 +25,12 @@ public class LessonController {
     return ResponseEntity.ok(service.save(lesson));
   }
 
-  @PutMapping(value = "/{id}")
-  public ResponseEntity<Lesson> update(@PathVariable Long id, @RequestBody Lesson Lesson) {
-    if (!service.findById(id).isPresent()) {
+  @PutMapping
+  public ResponseEntity<Lesson> update(@RequestBody Lesson lesson) {
+    if (!service.findById(lesson.getId()).isPresent()) {
       return ResponseEntity.badRequest().build();
     }
-    return ResponseEntity.ok(service.save(Lesson));
+    return ResponseEntity.ok(service.save(lesson));
   }
 
   @DeleteMapping(path = { "/{id}" })

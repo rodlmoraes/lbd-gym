@@ -25,12 +25,12 @@ public class AssociateController {
     return ResponseEntity.ok(service.save(associate));
   }
 
-  @PutMapping(value = "/{id}")
-  public ResponseEntity<Associate> update(@PathVariable Long id, @RequestBody Associate Associate) {
-    if (!service.findById(id).isPresent()) {
+  @PutMapping
+  public ResponseEntity<Associate> update(@RequestBody Associate associate) {
+    if (!service.findById(associate.getId()).isPresent()) {
       return ResponseEntity.badRequest().build();
     }
-    return ResponseEntity.ok(service.save(Associate));
+    return ResponseEntity.ok(service.save(associate));
   }
 
   @DeleteMapping(path = { "/{id}" })

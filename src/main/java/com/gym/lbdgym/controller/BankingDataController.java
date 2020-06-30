@@ -25,12 +25,12 @@ public class BankingDataController {
     return ResponseEntity.ok(service.save(bankingData));
   }
 
-  @PutMapping(value = "/{id}")
-  public ResponseEntity<BankingData> update(@PathVariable Long id, @RequestBody BankingData BankingData) {
-    if (!service.findById(id).isPresent()) {
+  @PutMapping
+  public ResponseEntity<BankingData> update(@RequestBody BankingData bankingData) {
+    if (!service.findById(bankingData.getId()).isPresent()) {
       return ResponseEntity.badRequest().build();
     }
-    return ResponseEntity.ok(service.save(BankingData));
+    return ResponseEntity.ok(service.save(bankingData));
   }
 
   @DeleteMapping(path = { "/{id}" })
