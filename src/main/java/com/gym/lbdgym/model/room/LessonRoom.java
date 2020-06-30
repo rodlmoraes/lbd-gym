@@ -16,7 +16,6 @@ public class LessonRoom extends Room {
 
     private static final long serialVersionUID = 1L;
 
-    private String lesson;
     private int maxNumberAssociates;
 
     @OneToMany(mappedBy = "lessonRoom")
@@ -25,7 +24,6 @@ public class LessonRoom extends Room {
 
     public LessonRoom(Long id, String location, int size, String lesson, int maxNumberAssociates) {
         super(id, location, size);
-        this.lesson = lesson;
         this.maxNumberAssociates = maxNumberAssociates;
     }
 }
