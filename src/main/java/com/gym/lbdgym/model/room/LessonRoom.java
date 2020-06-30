@@ -18,7 +18,8 @@ public class LessonRoom extends Room {
 
     private String lesson;
     private int maxNumberAssociates;
-    @OneToMany
+
+    @OneToMany(mappedBy = "lessonRoom")
     @JsonManagedReference(value = "lessonRoom")
     private List<LessonAvailable> lessonAvailable;
 

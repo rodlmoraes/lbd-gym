@@ -28,11 +28,11 @@ public class Monitor implements Serializable {
   private String professionalExperience;
   private String phone;
 
-  @OneToMany
+  @OneToMany(mappedBy = "monitor")
   @JsonManagedReference(value = "monitor")
   private List<LessonAvailable> lessonsAvailable;
 
-  @OneToMany
+  @OneToMany(mappedBy = "monitor")
   @JsonManagedReference(value = "monitor")
   private List<CanTeach> monitorLessons;
 }

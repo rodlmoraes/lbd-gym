@@ -23,7 +23,7 @@ public class Lesson implements Serializable {
     private Long id;
     private String name;
 
-    @OneToMany
+    @OneToMany(mappedBy = "lesson")
     @JsonManagedReference(value = "lesson")
     public List<CanTeach> canTeach;
 

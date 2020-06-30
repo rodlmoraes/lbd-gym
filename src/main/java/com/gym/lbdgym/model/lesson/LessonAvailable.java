@@ -31,7 +31,7 @@ public class LessonAvailable extends Lesson {
     @JsonBackReference(value = "monitor")
     private Monitor monitor;
 
-    @OneToMany
+    @OneToMany(mappedBy = "lessonAvailable")
     @JsonManagedReference(value = "lessonAvailable")
     private List<Enrollment> enrollments;
 
