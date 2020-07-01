@@ -26,4 +26,8 @@ public class LessonRoom extends Room {
         super(id, location, size);
         this.maxNumberAssociates = maxNumberAssociates;
     }
+
+    public LessonRoom() {
+
+    }
 }

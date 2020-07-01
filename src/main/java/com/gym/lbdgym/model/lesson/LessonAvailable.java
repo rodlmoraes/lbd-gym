@@ -2,9 +2,9 @@ package com.gym.lbdgym.model.lesson;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.gym.lbdgym.model.Monitor;
 import com.gym.lbdgym.model.CanTeach;
 import com.gym.lbdgym.model.Enrollment;
+import com.gym.lbdgym.model.Monitor;
 import com.gym.lbdgym.model.room.LessonRoom;
 import lombok.Getter;
 import lombok.Setter;
@@ -46,4 +46,7 @@ public class LessonAvailable extends Lesson {
         this.dateTime = dateTime;
     }
 
+    public LessonAvailable() {
+
+    }
 }

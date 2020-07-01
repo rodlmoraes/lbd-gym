@@ -26,4 +26,8 @@ public class EquipmentRoom extends Room {
         super(id, location, size);
         this.maxNumberEquipments = maxNumberEquipments;
     }
+
+    public EquipmentRoom() {
+
+    }
 }

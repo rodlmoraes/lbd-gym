@@ -28,4 +28,7 @@ public class SquashRoom extends Room {
         this.conservationState = conservationState;
     }
 
+    public SquashRoom() {
+
+    }
 }
