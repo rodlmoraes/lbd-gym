@@ -24,6 +24,8 @@ import java.util.UUID;
 import java.util.stream.IntStream;
 
 import static com.gym.lbdgym.model.enumerator.Schooling.COLLEGE;
+import static com.gym.lbdgym.model.enumerator.State.GOOD;
+import static com.gym.lbdgym.model.enumerator.State.VERY_BAD;
 
 @RestController
 @RequestMapping({ "/populatingBank" })
@@ -96,8 +98,8 @@ public class PopulatingBank {
         Random random = new Random();
         Booking booking = new Booking();
         booking.setId(id);
-        booking.setStartDate(LocalDateTime.MIN);
-        booking.setStartDate(LocalDateTime.MAX);
+        booking.setStartDate(LocalDateTime.now().minusHours(4));
+        booking.setStartDate(LocalDateTime.now().minusHours(2));
         //falta coisa, mudar o horario e criar socio
         return booking;
     }
@@ -105,18 +107,24 @@ public class PopulatingBank {
     public CanTeach createCanTeach(Long id){
         CanTeach canTeach = new CanTeach();
         canTeach.setId(id);
+//        canTeach.setMonitor();
+//        canTeach.setLesson();
         return canTeach;
     }
 
     public Enrollment createEnrollment(Long id){
         Enrollment enrollment = new Enrollment();
         enrollment.setId(id);
+//        enrollment.setAssociate();
+//        enrollment.setLessonAvailable();
         return enrollment;
     }
 
     public Equipment createEquipment(Long id){
         Equipment equipment = new Equipment();
         equipment.setId(id);
+        equipment.setConservationState(GOOD);
+        equipment.setDescription(UUID.randomUUID().toString().substring(0,15));
         return equipment;
     }
 
@@ -130,28 +138,36 @@ public class PopulatingBank {
     }
 
     public EquipmentRoom createEquipmentRom(){
+        Random random = new Random();
         EquipmentRoom equipmentRoom = new EquipmentRoom();
+        equipmentRoom.setMaxNumberEquipments(random.nextInt(2));
         return equipmentRoom;
     }
 
     public LessonRoom createLessonRoom(){
+        Random random = new Random();
         LessonRoom lessonRoom = new LessonRoom();
+        lessonRoom.setMaxNumberAssociates(random.nextInt(2));
         return lessonRoom;
     }
 
     public SquashRoom createSquashRoom(){
         SquashRoom squashRoom = new SquashRoom();
+        squashRoom.setConservationState(VERY_BAD);
         return squashRoom;
     }
 
     public LessonAvailable createLessonAvailable(){
         LessonAvailable lessonAvailable = new LessonAvailable();
+        lessonAvailable.setDescription(UUID.randomUUID().toString().substring(0,15));
+        lessonAvailable.setDateTime(LocalDateTime.now());
         return lessonAvailable;
     }
 
     public Lesson createLesson(Long id){
         Lesson lesson = new Lesson();
         lesson.setId(id);
+        lesson.setName(UUID.randomUUID().toString().substring(0,10));
         return lesson;
     }
 
