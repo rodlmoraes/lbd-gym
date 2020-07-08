@@ -18,10 +18,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.Month;
+import java.time.temporal.ChronoUnit;
 import java.util.Random;
 import java.util.UUID;
-import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 
 import static com.gym.lbdgym.model.enumerator.Schooling.COLLEGE;
 import static com.gym.lbdgym.model.enumerator.State.GOOD;
@@ -46,128 +50,140 @@ public class PopulatingBank {
     private final LessonService lessonService;
 
     @GetMapping
-    public ResponseEntity<?> populating (){
+    public ResponseEntity<?> populating() {
 
-        IntStream.range(0, 10).forEach(i -> {
-            associateService.save(createAssociate((long) i));
-            bankingDataService.save(createBankingData((long) i));
-            bookingService.save(createBooking((long) i));
-            canTeachService.save(createCanTeach((long) i));
-            enrollmentService.save(createEnrollment((long) i));
-            equipmentService.save(createEquipment((long) i));
-            monitorService.save(createMonitor((long) i));
-            equipmentRoomService.save(createEquipmentRom());
-            lessonRoomService.save(createLessonRoom());
-            squashRoomService.save(createSquashRoom());
-            lessonAvailableService.save(createLessonAvailable());
-            lessonService.save(createLesson((long) i));
+        LongStream.range(0, 10).forEach(i -> {
+            Associate associate = createAssociate();
+            SquashRoom squashRoom = createSquashRoom();
+            LessonRoom lessonRoom = createLessonRoom();
+            EquipmentRoom equipmentRoom = createEquipmentRom();
+            BankingData bankingData = createBankingData();
+            Monitor monitor = createMonitor();
+            Equipment equipment = createEquipment(equipmentRoom);
+            LessonAvailable lessonAvailable = createLessonAvailable(monitor, lessonRoom);
+            // Lesson lesson = createLesson();
+            Booking booking = createBooking(associate, squashRoom);
+            // CanTeach canTeach = createCanTeach(lesson, monitor);
+            Enrollment enrollment = createEnrollment(associate, lessonAvailable);
+
+            associateService.save(associate);
+            squashRoomService.save(squashRoom);
+            lessonRoomService.save(lessonRoom);
+            equipmentRoomService.save(equipmentRoom);
+            bankingDataService.save(bankingData);
+            monitorService.save(monitor);
+            equipmentService.save(equipment);
+            lessonAvailableService.save(lessonAvailable);
+            // lessonService.save(lesson);
+            bookingService.save(booking);
+            // canTeachService.save(canTeach);
+            enrollmentService.save(enrollment);
         });
-        return (ResponseEntity<?>) ResponseEntity.ok();
+        return ResponseEntity.ok().build();
     }
 
-    public static String createName(int amount) {
-        StringBuilder builder = new StringBuilder();
-        while (amount != 0) {
-            String letters = "ABCDEFGHIJKLMNOPQRSTUVYWXZ";
-            int character = (int) (Math.random() * letters.length());
-            builder.append(letters.charAt(character));
-            amount--;
-        }
-        return builder.toString();
-    }
+    public Associate createAssociate() {
+        String randomString = UUID.randomUUID().toString();
 
-    public Associate createAssociate(Long id){
         Associate associate = new Associate();
-        associate.setId(id);
-        associate.setName(createName(10));
-        associate.setAddress(UUID.randomUUID().toString().substring(0,10));
-        associate.setProfession(UUID.randomUUID().toString().substring(0,15));
-        associate.setPhone(UUID.randomUUID().toString().substring(0,3));
+        associate.setName(randomString.substring(0, 5));
+        associate.setAddress(randomString.substring(5, 10));
+        associate.setProfession(randomString.substring(10, 15));
+        associate.setPhone(randomString.substring(0, 9));
         return associate;
     }
 
-    public BankingData createBankingData(Long id){
+    public BankingData createBankingData() {
+        String randomString = UUID.randomUUID().toString();
+
         BankingData bankingData = new BankingData();
-        bankingData.setId(id);
-        bankingData.setAccount(UUID.randomUUID().toString().substring(0,5));
-        bankingData.setAgency(UUID.randomUUID().toString().substring(0,10));
+        bankingData.setAccount(randomString.substring(0, 5));
+        bankingData.setAgency(randomString.substring(5, 10));
         return bankingData;
     }
 
-    public Booking createBooking(Long id){
-        Random random = new Random();
+    public Booking createBooking(Associate associate, SquashRoom squashRoom) {
+        LocalDateTime start = LocalDateTime.of(LocalDate.of(1970, Month.JANUARY, 1), LocalTime.of(0, 0, 0));
+        long days = ChronoUnit.DAYS.between(start, LocalDateTime.now());
+        LocalDateTime randomStartDate = start.plusDays(new Random().nextInt((int) days + 1));
+        LocalDateTime randomEndDate = randomStartDate.plusHours(2);
+
         Booking booking = new Booking();
-        booking.setId(id);
-        booking.setStartDate(LocalDateTime.now().minusHours(4));
-        booking.setStartDate(LocalDateTime.now().minusHours(2));
-        //falta coisa, mudar o horario e criar socio
+        booking.setAssociate(associate);
+        booking.setSquashRoom(squashRoom);
+        booking.setStartDate(randomStartDate);
+        booking.setEndDate(randomEndDate);
         return booking;
     }
 
-    public CanTeach createCanTeach(Long id){
+    public CanTeach createCanTeach(Lesson lesson, Monitor monitor) {
         CanTeach canTeach = new CanTeach();
-        canTeach.setId(id);
-//        canTeach.setMonitor();
-//        canTeach.setLesson();
+        canTeach.setLesson(lesson);
+        canTeach.setMonitor(monitor);
         return canTeach;
     }
 
-    public Enrollment createEnrollment(Long id){
+    public Enrollment createEnrollment(Associate associate, LessonAvailable lessonAvailable) {
         Enrollment enrollment = new Enrollment();
-        enrollment.setId(id);
-//        enrollment.setAssociate();
-//        enrollment.setLessonAvailable();
         return enrollment;
     }
 
-    public Equipment createEquipment(Long id){
+    public Equipment createEquipment(EquipmentRoom equipmentRoom) {
         Equipment equipment = new Equipment();
-        equipment.setId(id);
         equipment.setConservationState(GOOD);
-        equipment.setDescription(UUID.randomUUID().toString().substring(0,15));
+        equipment.setEquipmentRoom(equipmentRoom);
+        equipment.setDescription(UUID.randomUUID().toString().substring(0, 15));
         return equipment;
     }
 
-    public Monitor createMonitor(Long id){
+    public Monitor createMonitor() {
+        String randomString = UUID.randomUUID().toString();
+
         Monitor monitor = new Monitor();
-        monitor.setId(id);
-        monitor.setName(createName(10));
+        monitor.setName(randomString.substring(0, 10));
+        monitor.setRg(randomString.substring(10, 20));
         monitor.setSchooling(COLLEGE);
-        monitor.setRg(UUID.randomUUID().toString().substring(0,10));
         return monitor;
     }
 
-    public EquipmentRoom createEquipmentRom(){
+    public EquipmentRoom createEquipmentRom() {
         Random random = new Random();
+
         EquipmentRoom equipmentRoom = new EquipmentRoom();
         equipmentRoom.setMaxNumberEquipments(random.nextInt(2));
         return equipmentRoom;
     }
 
-    public LessonRoom createLessonRoom(){
+    public LessonRoom createLessonRoom() {
         Random random = new Random();
+
         LessonRoom lessonRoom = new LessonRoom();
         lessonRoom.setMaxNumberAssociates(random.nextInt(2));
         return lessonRoom;
     }
 
-    public SquashRoom createSquashRoom(){
+    public SquashRoom createSquashRoom() {
         SquashRoom squashRoom = new SquashRoom();
         squashRoom.setConservationState(VERY_BAD);
         return squashRoom;
     }
 
-    public LessonAvailable createLessonAvailable(){
+    public LessonAvailable createLessonAvailable(Monitor monitor, LessonRoom lessonRoom) {
+        LocalDateTime start = LocalDateTime.of(LocalDate.of(1970, Month.JANUARY, 1), LocalTime.of(0, 0, 0));
+        long days = ChronoUnit.DAYS.between(start, LocalDateTime.now());
+        LocalDateTime randomDate = start.plusDays(new Random().nextInt((int) days + 1));
+
         LessonAvailable lessonAvailable = new LessonAvailable();
-        lessonAvailable.setDescription(UUID.randomUUID().toString().substring(0,15));
-        lessonAvailable.setDateTime(LocalDateTime.now());
+        lessonAvailable.setMonitor(monitor);
+        lessonAvailable.setLessonRoom(lessonRoom);
+        lessonAvailable.setDescription(UUID.randomUUID().toString().substring(0, 15));
+        lessonAvailable.setDateTime(randomDate);
         return lessonAvailable;
     }
 
-    public Lesson createLesson(Long id){
+    public Lesson createLesson() {
         Lesson lesson = new Lesson();
-        lesson.setId(id);
-        lesson.setName(UUID.randomUUID().toString().substring(0,10));
+        lesson.setName(UUID.randomUUID().toString().substring(0, 10));
         return lesson;
     }
 
