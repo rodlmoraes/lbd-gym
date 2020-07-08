@@ -8,7 +8,6 @@ import com.gym.lbdgym.model.room.LessonRoom;
 import com.gym.lbdgym.model.room.SquashRoom;
 import com.gym.lbdgym.service.*;
 import com.gym.lbdgym.service.lesson.LessonAvailableService;
-import com.gym.lbdgym.service.lesson.LessonService;
 import com.gym.lbdgym.service.room.EquipmentRoomService;
 import com.gym.lbdgym.service.room.LessonRoomService;
 import com.gym.lbdgym.service.room.SquashRoomService;
@@ -47,7 +46,6 @@ public class PopulatingBank {
     private final LessonRoomService lessonRoomService;
     private final SquashRoomService squashRoomService;
     private final LessonAvailableService lessonAvailableService;
-    private final LessonService lessonService;
 
     @GetMapping
     public ResponseEntity<?> populating() {
@@ -61,9 +59,8 @@ public class PopulatingBank {
             Monitor monitor = createMonitor();
             Equipment equipment = createEquipment(equipmentRoom);
             LessonAvailable lessonAvailable = createLessonAvailable(monitor, lessonRoom);
-            // Lesson lesson = createLesson();
             Booking booking = createBooking(associate, squashRoom);
-            // CanTeach canTeach = createCanTeach(lesson, monitor);
+            CanTeach canTeach = createCanTeach(lessonAvailable, monitor);
             Enrollment enrollment = createEnrollment(associate, lessonAvailable);
 
             associateService.save(associate);
@@ -74,9 +71,8 @@ public class PopulatingBank {
             monitorService.save(monitor);
             equipmentService.save(equipment);
             lessonAvailableService.save(lessonAvailable);
-            // lessonService.save(lesson);
             bookingService.save(booking);
-            // canTeachService.save(canTeach);
+            canTeachService.save(canTeach);
             enrollmentService.save(enrollment);
         });
         return ResponseEntity.ok().build();
@@ -125,6 +121,8 @@ public class PopulatingBank {
 
     public Enrollment createEnrollment(Associate associate, LessonAvailable lessonAvailable) {
         Enrollment enrollment = new Enrollment();
+        enrollment.setAssociate(associate);
+        enrollment.setLessonAvailable(lessonAvailable);
         return enrollment;
     }
 
@@ -180,11 +178,4 @@ public class PopulatingBank {
         lessonAvailable.setDateTime(randomDate);
         return lessonAvailable;
     }
-
-    public Lesson createLesson() {
-        Lesson lesson = new Lesson();
-        lesson.setName(UUID.randomUUID().toString().substring(0, 10));
-        return lesson;
-    }
-
 }
