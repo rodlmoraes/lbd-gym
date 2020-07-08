@@ -1,5 +1,6 @@
 package com.gym.lbdgym.controller;
 
+import com.gym.lbdgym.model.Associate;
 import com.gym.lbdgym.model.Booking;
 import com.gym.lbdgym.model.room.SquashRoom;
 import com.gym.lbdgym.service.AssociateService;
@@ -62,9 +63,10 @@ public class BookingController {
 
   @GetMapping(path = { "/associateSquashRooms/{associateId}" })
   public ResponseEntity<List<SquashRoom>> findAssociateSquashRooms(@PathVariable Long associateId) {
-    if (!associateService.findById(associateId).isPresent()) {
+    Optional<Associate> associate = associateService.findById(associateId);
+    if (!associate.isPresent()) {
       return ResponseEntity.badRequest().build();
     }
-    return ResponseEntity.ok(service.associateSquashRooms(associateId));
+    return ResponseEntity.ok(service.associateSquashRooms(associate));
   }
 }

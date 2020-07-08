@@ -1,5 +1,6 @@
 package com.gym.lbdgym.service;
 
+import com.gym.lbdgym.model.Associate;
 import com.gym.lbdgym.model.Booking;
 import com.gym.lbdgym.model.room.SquashRoom;
 import com.gym.lbdgym.repository.BookingRepository;
@@ -32,8 +33,8 @@ public class BookingService {
     repository.deleteById(id);
   }
 
-  public List<SquashRoom> associateSquashRooms(Long idAssociate) {
-    List<Booking> bookings = repository.findAllByAssociate(idAssociate);
+  public List<SquashRoom> associateSquashRooms(Optional<Associate> associate) {
+    List<Booking> bookings = repository.findAllByAssociate(associate);
     return bookings.stream().map(Booking::getSquashRoom).collect(Collectors.toList());
   }
 }
