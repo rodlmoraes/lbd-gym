@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -33,8 +34,8 @@ public class BookingService {
     repository.deleteById(id);
   }
 
-  public List<SquashRoom> associateSquashRooms(Optional<Associate> associate) {
+  public Set<SquashRoom> associateSquashRooms(Optional<Associate> associate) {
     List<Booking> bookings = repository.findAllByAssociate(associate);
-    return bookings.stream().map(Booking::getSquashRoom).collect(Collectors.toList());
+    return bookings.stream().map(Booking::getSquashRoom).collect(Collectors.toSet());
   }
 }

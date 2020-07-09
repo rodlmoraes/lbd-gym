@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping({ "/booking" })
@@ -62,7 +63,7 @@ public class BookingController {
   }
 
   @GetMapping(path = { "/associateSquashRooms/{associateId}" })
-  public ResponseEntity<List<SquashRoom>> findAssociateSquashRooms(@PathVariable Long associateId) {
+  public ResponseEntity<Set<SquashRoom>> findAssociateSquashRooms(@PathVariable Long associateId) {
     Optional<Associate> associate = associateService.findById(associateId);
     if (!associate.isPresent()) {
       return ResponseEntity.badRequest().build();
