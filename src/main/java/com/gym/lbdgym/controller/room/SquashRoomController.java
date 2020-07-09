@@ -1,12 +1,12 @@
 package com.gym.lbdgym.controller.room;
 
+import com.gym.lbdgym.model.room.IsAvailableRequestBody;
 import com.gym.lbdgym.model.room.SquashRoom;
 import com.gym.lbdgym.service.room.SquashRoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,12 +50,12 @@ public class SquashRoomController {
   }
 
   @PostMapping(path = { "/available" })
-  public ResponseEntity<Boolean> isAvailable(@RequestBody Long id, @RequestBody LocalDateTime startDate,
-      @RequestBody LocalDateTime endDate) {
-    if (!service.findById(id).isPresent()) {
+  public ResponseEntity<Boolean> isAvailable(@RequestBody IsAvailableRequestBody body) {
+    Long squashRoomId = body.getId();
+    if (!service.findById(squashRoomId).isPresent()) {
       return ResponseEntity.badRequest().build();
     }
 
-    return ResponseEntity.ok(service.isAvailable(id, startDate, endDate));
+    return ResponseEntity.ok(service.isAvailable(squashRoomId, body.getStartDate(), body.getEndDate()));
   }
 }

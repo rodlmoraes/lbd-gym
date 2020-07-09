@@ -50,7 +50,7 @@ public class PopulatingBank {
     @GetMapping
     public ResponseEntity<?> populating() {
 
-        LongStream.range(0, 10).forEach(i -> {
+        LongStream.range(0, 20000).forEach(i -> {
             Associate associate = createAssociate();
             SquashRoom squashRoom = createSquashRoom();
             LessonRoom lessonRoom = createLessonRoom();
