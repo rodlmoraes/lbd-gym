@@ -13,8 +13,6 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 @Entity
-@NamedEntityGraph(attributeNodes = { @NamedAttributeNode("bookings"), @NamedAttributeNode("enrollments"),
-    @NamedAttributeNode("bankingData") })
 @Table(indexes = { @Index(name = "name_index", columnList = "name"),
     @Index(name = "address_index", columnList = "address"),
     @Index(name = "profession_index", columnList = "profession"), @Index(name = "phone_index", columnList = "phone") })
