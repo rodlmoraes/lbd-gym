@@ -13,6 +13,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Data
 @Entity
+@Table(indexes = { @Index(name = "associate_id_index", columnList = "associate_id"),
+        @Index(name = "lessonAvailable_id_index", columnList = "lessonAvailable_id") })
 public class Enrollment implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -21,12 +23,12 @@ public class Enrollment implements Serializable {
     @GeneratedValue
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "associate_id", nullable = false)
     @JsonBackReference(value = "associate")
     private Associate associate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lessonAvailable_id", nullable = false)
     @JsonBackReference(value = "lessonAvailable")
     private LessonAvailable lessonAvailable;

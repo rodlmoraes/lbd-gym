@@ -14,6 +14,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Data
 @Entity
+@Table(indexes = { @Index(name = "squashRoom_id_index", columnList = "squashRoom_id"),
+        @Index(name = "associate_id_index", columnList = "associate_id"),
+        @Index(name = "startDate_index", columnList = "startDate"),
+        @Index(name = "endDate_index", columnList = "endDate") })
 public class Booking implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -24,12 +28,12 @@ public class Booking implements Serializable {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "squashRoom_id", nullable = false)
     @JsonBackReference(value = "squashRoom")
     private SquashRoom squashRoom;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "associate_id", nullable = false)
     @JsonBackReference(value = "associate")
     private Associate associate;

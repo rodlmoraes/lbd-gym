@@ -13,6 +13,11 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 @Entity
+@NamedEntityGraph(attributeNodes = { @NamedAttributeNode("bookings"), @NamedAttributeNode("enrollments"),
+    @NamedAttributeNode("bankingData") })
+@Table(indexes = { @Index(name = "name_index", columnList = "name"),
+    @Index(name = "address_index", columnList = "address"),
+    @Index(name = "profession_index", columnList = "profession"), @Index(name = "phone_index", columnList = "phone") })
 public class Associate implements Serializable {
 
   private static final long serialVersionUID = 1L;
@@ -25,14 +30,14 @@ public class Associate implements Serializable {
   private String profession;
   private String phone;
 
-  @OneToMany(mappedBy = "associate")
+  @OneToMany(mappedBy = "associate", fetch = FetchType.LAZY)
   @JsonManagedReference(value = "associate")
   private List<Enrollment> enrollments;
 
-  @OneToOne
+  @OneToOne(fetch = FetchType.LAZY)
   private BankingData bankingData;
 
-  @OneToMany(mappedBy = "associate")
+  @OneToMany(mappedBy = "associate", fetch = FetchType.LAZY)
   @JsonManagedReference(value = "associate")
   private List<Booking> bookings;
 }

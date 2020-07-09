@@ -10,15 +10,22 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
 @Setter
 @Entity
+@Table(indexes = { @Index(name = "monitor_id_index", columnList = "monitor_id"),
+        @Index(name = "lessonRoom_id_index", columnList = "lessonRoom_id"),
+        @Index(name = "dateTime_index", columnList = "dateTime") })
 public class LessonAvailable extends Lesson {
 
     private static final long serialVersionUID = 1L;
@@ -26,16 +33,16 @@ public class LessonAvailable extends Lesson {
     private String description;
     private LocalDateTime dateTime;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "monitor_id", nullable = false)
     @JsonBackReference(value = "monitor")
     private Monitor monitor;
 
-    @OneToMany(mappedBy = "lessonAvailable")
+    @OneToMany(mappedBy = "lessonAvailable", fetch = FetchType.LAZY)
     @JsonManagedReference(value = "lessonAvailable")
     private List<Enrollment> enrollments;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lessonRoom_id", nullable = false)
     @JsonBackReference(value = "lessonRoom")
     private LessonRoom lessonRoom;
